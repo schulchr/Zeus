@@ -88,9 +88,9 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	sphere_center.position = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	sphere_center.color = D3DXVECTOR4(0.75f, 0.25f, 1.0f, 1.0f);
 	sphere_center.normal = D3DXVECTOR3(0.0f, 0.0f, 1.0f);
-	geometry->LoadObject(dev, devcon, "cow.obj", D3DXVECTOR4(-0.45f, 0.65f, 0.20f, 1.0f));
+	geometry->LoadObject(dev, devcon, "frog.obj", D3DXVECTOR4(1.0f, 0.0f, 0.0f, 0.35f));
     geometry->CreateSphere(dev, devcon, sphere_center, 1.0f, 30, 30);
-	geometry->LoadObject(dev, devcon, "frog.obj",  D3DXVECTOR4(1.0f, 0.0f, 0.0f, 0.35f));
+	geometry->LoadObject(dev, devcon, "cow.obj",  D3DXVECTOR4(-0.45f, 0.65f, 0.20f, 1.0f));
 	
 	//Set lighting
 	light = new LIGHT();
@@ -133,7 +133,6 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		// create a rotation matrix
 		D3DXMatrixRotationY(&matRotateY, Time);
 		D3DXMatrixRotationZ(&matRotateZ, Time);
-
 		// create a translation matrix
 		D3DXMatrixTranslation(&matTrans, 1.5, 0.0f, 0.0f);
 
@@ -184,8 +183,9 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
 		//set matrix for third
 		D3DXMatrixTranslation(&matTrans, 0.0f, 1.5f, 2.0f);
+		D3DXMatrixScaling(&matScale, 0.5f, 0.5f, 0.5f);
 
-		matrices->matWorld = matRotateY * matRotateZ * matTrans;
+		matrices->matWorld = matRotateY * matRotateZ * matScale * matTrans;
 		geometry->SetMatrices(matrices, 2);
 
         geometry->Render(dev, devcon, backbuffer, swapchain, pCBuffer, vCBuffer, zbuffer, pTexture,

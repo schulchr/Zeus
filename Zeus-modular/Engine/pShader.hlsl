@@ -33,6 +33,9 @@ float4 PShader(VOut input) : SV_TARGET
 	if(input.color.x < 0)
 	{
 		textureColor = Texture.Sample(ss, input.texcord);
+		
+		clip( textureColor.r < 0.45f ? -1:1);
+		textureColor.a = textureColor.r;
 	}
 
     // Set the default output color to the ambient light value for all pixels.
